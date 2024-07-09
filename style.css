@@ -25,7 +25,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    font-size: 40px;
+    font-size: 47px;
     padding-right: 10px;
     font-family:'Courier New', Courier, monospace;
 }
@@ -62,7 +62,10 @@ body {
     margin-bottom: 0px;
 }
 
-.calculator-button {
+.calculator-button-operator,
+.calculator-button-number,
+.calculator-button-reset,
+.calculator-button-equals {
     border-style: solid;
     width: 60px;
     height:60px;
