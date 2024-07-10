@@ -127,52 +127,26 @@ function operate(first, second, operator) {
 
     if (operator == "+") {
         result = numberOne + numberTwo;
-        calculatorScreen.textContent = result;
-        secondNumber.toString();
-        secondNumber = "";
-        secondNumberExists = false;
-        firstNumber = result;
-        firstNumber.toString();
-        selectedOperator = "";
-        isOperatorSelected = false;
-        resultExists = true;
     } else if (operator == "-") {
         result = numberOne - numberTwo;
-        calculatorScreen.textContent = result;
-        secondNumber.toString();
-        secondNumber = "";
-        secondNumberExists = false;
-        firstNumber = result;
-        firstNumber.toString();
-        selectedOperator = "";
-        isOperatorSelected = false;
-        resultExists = true;
     } else if (operator == "*") {
         let operationArray = [numberOne, numberTwo];
         result = muiltiply(operationArray); 
-        calculatorScreen.textContent = result;
-        secondNumber.toString();
-        secondNumber = "";
-        secondNumberExists = false;
-        firstNumber = result;
-        firstNumber.toString();
-        selectedOperator = "";
-        isOperatorSelected = false;
-        resultExists = true;
     } else if (operator == "/") {
         let operationArray = [numberOne, numberTwo];
         result = divide(operationArray); 
-        calculatorScreen.textContent = result;
-        secondNumber.toString();
-        secondNumber = "";
-        secondNumberExists = false;
-        firstNumber = result;
-        firstNumber.toString();
-        selectedOperator = "";
-        isOperatorSelected = false;
-        resultExists = true;
     }
-    console.log(result);
+    secondNumber.toString();
+    secondNumber = "";
+    secondNumberExists = false;
+    firstNumber = result;
+    firstNumber.toString();
+    selectedOperator = "";
+    isOperatorSelected = false;
+    resultExists = true;
+
+    calculatorScreen.textContent = result;
+
     return result;
 }
 
@@ -191,3 +165,5 @@ function divide(array) {
 //round result to one decimal
 
 //add error message if result is too big
+
+//operator button selected after multiple operations
