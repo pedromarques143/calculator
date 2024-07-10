@@ -74,7 +74,7 @@ for (let button of calculatorNumbers) {
             if (secondNumber.length < 99 && isOperatorSelected) {
                 if (button.textContent == "." && !dotExists && !secondNumberExists) {
                     secondNumber = "0.";
-                    dotExists = true;
+                    dotExists = true;multiplicationResult
                     calculatorScreen.textContent = secondNumber;
                     secondNumberExists = true;
                 } else if (button.textContent == "." && !dotExists) {
@@ -83,9 +83,9 @@ for (let button of calculatorNumbers) {
                     calculatorScreen.textContent = secondNumber;
                 } else if (button.textContent == ".") {
                     secondNumber.slice(0, -1);
-                } else {6
+                } else {
                     secondNumber += button.textContent;
-                    calculatorScreen.textCo6ntent = secondNumber;
+                    calculatorScreen.textContent = secondNumber;
                     secondNumberExists = true;
                 }
 
@@ -135,16 +135,42 @@ function operate(first, second, operator) {
         isOperatorSelected = false;
         resultExists = true;
     } else if (operator == "*") {
-
+        let operationArray = [numberOne, numberTwo];
+        result = muiltiply(operationArray); 
+        calculatorScreen.textContent = result;
+        secondNumber.toString();
+        secondNumber = "";
+        secondNumberExists = false;
+        firstNumber = result;
+        firstNumber.toString();
+        selectedOperator = "";
+        isOperatorSelected = false;
+        resultExists = true;
     } else if (operator == "/") {
-
+        let operationArray = [numberOne, numberTwo];
+        result = divide(operationArray); 
+        calculatorScreen.textContent = result;
+        secondNumber.toString();
+        secondNumber = "";
+        secondNumberExists = false;
+        firstNumber = result;
+        firstNumber.toString();
+        selectedOperator = "";
+        isOperatorSelected = false;
+        resultExists = true;
     }
-
+    console.log(result);
     return result;
 }
 
 //muiltiply
-
+function muiltiply(array) {
+    return array.reduce((total, current) => total * current);
+}
 //divide
+function divide(array) {
+    return array.reduce((total, current) => total / current);
+}
+
 
 //reset button
