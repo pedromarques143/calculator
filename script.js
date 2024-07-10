@@ -2,7 +2,6 @@ let firstNumber = "";
 let selectedOperator;
 let secondNumber = "";
 
-let displayValue = 0;
 let calculatorScreen = document.querySelector(".calculator-screen");
 
 let firstNumberExists = false;
@@ -11,9 +10,30 @@ let dotExists = false;
 let resultExists = false;
 let isOperatorSelected = false;
 
-//get first number
 const calculatorNumbers = document.querySelectorAll(".calculator-button-number");
+const calculatorOperators = document.querySelectorAll(".calculator-button-operator");
 
+//AC button
+const acButton = document.querySelector(".calculator-button-reset");
+acButton.addEventListener("click", () => {
+    firstNumber = "";
+    firstNumberExists = false;
+    secondNumber = "";
+    secondNumberExists = false;
+    dotExists = false;
+    resultExists = false;
+    calculatorScreen.textContent = "0";
+    if (isOperatorSelected) {
+        for (let button of calculatorOperators) {
+            button.style.backgroundColor = "darkkhaki";
+        }
+        isOperatorSelected = false;
+    }
+});
+
+//backspace button
+
+//get first number
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         if (resultExists && !isOperatorSelected) {
@@ -44,14 +64,13 @@ for (let button of calculatorNumbers) {
 }
 
 //get operator
-const calculatorOperators = document.querySelectorAll(".calculator-button-operator");
-
 for (let button of calculatorOperators) {
     button.addEventListener("click", () => {
         if (firstNumberExists && !isOperatorSelected) {
             selectedOperator = button.textContent;
             isOperatorSelected = true;
             dotExists = false;
+            button.style.backgroundColor = "darkolivegreen";
         }
 
         if (firstNumberExists && secondNumberExists) {
@@ -59,10 +78,6 @@ for (let button of calculatorOperators) {
             isOperatorSelected = true;
             selectedOperator = button.textContent;
             dotExists = false;
-        }
-
-        if (isOperatorSelected) {
-            button.style.backgroundColor = "darkolivegreen";
         }
     });
 }
@@ -96,7 +111,7 @@ for (let button of calculatorNumbers) {
         }
 
     });
-}resultExists
+}
 
 //equals button
 const equalsButton = document.querySelector(".calculator-button-equals");
@@ -173,4 +188,4 @@ function divide(array) {
 }
 
 
-//reset button
+//round result to one decimal
