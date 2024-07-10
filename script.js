@@ -31,8 +31,6 @@ acButton.addEventListener("click", () => {
     }
 });
 
-//backspace button
-
 //get first number
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
@@ -188,4 +186,8 @@ function divide(array) {
 }
 
 
+//backspace button
+
 //round result to one decimal
+
+//add error message if result is too big
