@@ -167,3 +167,5 @@ function divide(array) {
 //add error message if result is too big
 
 //operator button selected after multiple operations
+
+//monospace
