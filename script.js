@@ -16,6 +16,12 @@ const calculatorNumbers = document.querySelectorAll(".calculator-button-number")
 
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
+        if (resultExists && !isOperatorSelected) {
+            firstNumber.toString();
+            firstNumber = "";  
+            resultExists = false;
+        }
+        
         if (firstNumber.length < 9 && !isOperatorSelected) {
             if (button.textContent == "." && !dotExists && !firstNumberExists) {
                 firstNumber = "0.";
@@ -44,9 +50,19 @@ for (let button of calculatorOperators) {
     button.addEventListener("click", () => {
         if (firstNumberExists && !isOperatorSelected) {
             selectedOperator = button.textContent;
-            button.style.backgroundColor = "darkolivegreen";
             isOperatorSelected = true;
             dotExists = false;
+        }
+
+        if (firstNumberExists && secondNumberExists) {
+            operate (firstNumber, secondNumber, selectedOperator);
+            isOperatorSelected = true;
+            selectedOperator = button.textContent;
+            dotExists = false;
+        }
+
+        if (isOperatorSelected) {
+            button.style.backgroundColor = "darkolivegreen";
         }
     });
 }
@@ -55,30 +71,32 @@ for (let button of calculatorOperators) {
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         if (isOperatorSelected == true) {
-            if (button.textContent == "." && !dotExists && !secondNumberExists) {
-                secondNumber = "0.";
-                dotExists = true;
-                calculatorScreen.textContent = secondNumber;
-                secondNumberExists = true;
-            } else if (button.textContent == "." && !dotExists) {
-                secondNumber += button.textContent;
-                dotExists = true;
-                calculatorScreen.textContent = secondNumber;
-            } else if (button.textContent == ".") {
-                secondNumber.slice(0, -1);
-            } else {
-                secondNumber += button.textContent;
-                calculatorScreen.textContent = secondNumber;
-                secondNumberExists = true;
-            }
+            if (secondNumber.length < 99 && isOperatorSelected) {
+                if (button.textContent == "." && !dotExists && !secondNumberExists) {
+                    secondNumber = "0.";
+                    dotExists = true;
+                    calculatorScreen.textContent = secondNumber;
+                    secondNumberExists = true;
+                } else if (button.textContent == "." && !dotExists) {
+                    secondNumber += button.textContent;
+                    dotExists = true;
+                    calculatorScreen.textContent = secondNumber;
+                } else if (button.textContent == ".") {
+                    secondNumber.slice(0, -1);
+                } else {6
+                    secondNumber += button.textContent;
+                    calculatorScreen.textCo6ntent = secondNumber;
+                    secondNumberExists = true;
+                }
 
-            for (let buttonTwo of calculatorOperators) {
-                buttonTwo.style.backgroundColor = "darkseagreen";
+                for (let buttonTwo of calculatorOperators) {
+                    buttonTwo.style.backgroundColor = "darkseagreen";
+                }
             }
         }
-        isOperatorSelected = false;
+
     });
-}
+}resultExists
 
 //equals button
 const equalsButton = document.querySelector(".calculator-button-equals");
@@ -88,7 +106,7 @@ equalsButton.addEventListener("click", () => {
 });
 
 
-//get result
+//get result function
 function operate(first, second, operator) {
     let numberOne = Number(first);
     let numberTwo = Number(second);
@@ -97,15 +115,33 @@ function operate(first, second, operator) {
     if (operator == "+") {
         result = numberOne + numberTwo;
         calculatorScreen.textContent = result;
+        secondNumber.toString();
+        secondNumber = "";
         secondNumberExists = false;
         firstNumber = result;
+        firstNumber.toString();
+        selectedOperator = "";
+        isOperatorSelected = false;
+        resultExists = true;
+    } else if (operator == "-") {
+        result = numberOne - numberTwo;
+        calculatorScreen.textContent = result;
+        secondNumber.toString();
+        secondNumber = "";
+        secondNumberExists = false;
+        firstNumber = result;
+        firstNumber.toString();
+        selectedOperator = "";
+        isOperatorSelected = false;
+        resultExists = true;
+    } else if (operator == "*") {
+
+    } else if (operator == "/") {
+
     }
 
     return result;
 }
-
-
-//subtract
 
 //muiltiply
 
