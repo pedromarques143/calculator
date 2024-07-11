@@ -88,7 +88,7 @@ for (let button of calculatorNumbers) {
             if (secondNumber.length < 9 && isOperatorSelected) {
                 if (button.textContent == "." && !dotExists && !secondNumberExists) {
                     secondNumber = "0.";
-                    dotExists = true;multiplicationResult
+                    dotExists = true;
                     calculatorScreen.textContent = secondNumber;
                     secondNumberExists = true;
                 } else if (button.textContent == "." && !dotExists) {
@@ -141,8 +141,12 @@ function operate(first, second, operator) {
     if (result > 999999999) {
         calculatorScreen.textContent = "TOOBIG4ME";
         result = 0;
-    } else if (result.length > 9 && result %1 !== 0){
-    //    ROUND TO ONE DECIMAL
+    } else if (result.toString().length > 9 && result %1 != 0){
+        let integerNumber = Math.round(result);
+        let integerLength = integerNumber.toString().length;
+        let decimalPlaces = result.toString().length - integerLength - 1;
+        result.toFixed(decimalPlaces);
+        calculatorScreen.textContent = result;
     } else {
         calculatorScreen.textContent = result;
     }
@@ -155,8 +159,7 @@ function operate(first, second, operator) {
     selectedOperator = "";
     isOperatorSelected = false;
     resultExists = true;
-
-
+    dotExists = false;
 
     return result;
 }
