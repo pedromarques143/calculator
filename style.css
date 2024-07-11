@@ -33,7 +33,7 @@ body {
     align-items: flex-end;
     font-size: 47px;
     padding-right: 10px;
-    font-family:'Courier New', Courier, monospace;
+    font-family: Courier, monospace, 'Andake Mono', 'Courier New';
 }
 
 .first-line {
