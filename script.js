@@ -50,7 +50,7 @@ for (let button of calculatorNumbers) {
                 firstNumber += button.textContent;
                 dotExists = true;
                 calculatorScreen.textContent = firstNumber;
-            } else if (button.textContent == ".") {
+            } else if (button.textContent == "." || firstNumber.length == 9) {
                 firstNumber.slice(0, -1);
             } else {
                 firstNumber += button.textContent;
@@ -85,7 +85,7 @@ for (let button of calculatorOperators) {
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         if (isOperatorSelected == true) {
-            if (secondNumber.length < 99 && isOperatorSelected) {
+            if (secondNumber.length < 9 && isOperatorSelected) {
                 if (button.textContent == "." && !dotExists && !secondNumberExists) {
                     secondNumber = "0.";
                     dotExists = true;multiplicationResult
@@ -95,7 +95,7 @@ for (let button of calculatorNumbers) {
                     secondNumber += button.textContent;
                     dotExists = true;
                     calculatorScreen.textContent = secondNumber;
-                } else if (button.textContent == ".") {
+                } else if (button.textContent == "." || secondNumber.length == 9) {
                     secondNumber.slice(0, -1);
                 } else {
                     secondNumber += button.textContent;
@@ -137,6 +137,16 @@ function operate(first, second, operator) {
         let operationArray = [numberOne, numberTwo];
         result = divide(operationArray); 
     }
+
+    if (result > 999999999) {
+        calculatorScreen.textContent = "TOOBIG4ME";
+        result = 0;
+    } else if (result.length > 9 && result %1 !== 0){
+    //    ROUND TO ONE DECIMAL
+    } else {
+        calculatorScreen.textContent = result;
+    }
+
     secondNumber.toString();
     secondNumber = "";
     secondNumberExists = false;
@@ -146,7 +156,7 @@ function operate(first, second, operator) {
     isOperatorSelected = false;
     resultExists = true;
 
-    calculatorScreen.textContent = result;
+
 
     return result;
 }
@@ -165,4 +175,4 @@ function divide(array) {
 
 //round result to one decimal
 
-//add error message if result is too big
+//add keyboard functionality
