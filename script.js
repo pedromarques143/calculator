@@ -74,6 +74,7 @@ for (let button of calculatorOperators) {
         if (firstNumberExists && secondNumberExists) {
             operate (firstNumber, secondNumber, selectedOperator);
             isOperatorSelected = true;
+            button.style.backgroundColor = "darkolivegreen";
             selectedOperator = button.textContent;
             dotExists = false;
         }
@@ -165,7 +166,3 @@ function divide(array) {
 //round result to one decimal
 
 //add error message if result is too big
-
-//operator button selected after multiple operations
-
-//monospace
