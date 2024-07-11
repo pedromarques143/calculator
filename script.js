@@ -138,14 +138,18 @@ function operate(first, second, operator) {
         result = divide(operationArray); 
     }
 
+    let resultLength = result.toString().length;
+
     if (result > 999999999) {
         calculatorScreen.textContent = "TOOBIG4ME";
         result = 0;
-    } else if (result.toString().length > 9 && result %1 != 0){
+    } else if (resultLength > 9) {
         let integerNumber = Math.round(result);
         let integerLength = integerNumber.toString().length;
-        let decimalPlaces = result.toString().length - integerLength - 1;
-        result.toFixed(decimalPlaces);
+        let decimalPlaces = 9 - integerLength - 1;
+        console.log(decimalPlaces);
+        result = roundNumber(result, decimalPlaces);
+        console.log(result);
         calculatorScreen.textContent = result;
     } else {
         calculatorScreen.textContent = result;
@@ -173,9 +177,11 @@ function divide(array) {
     return array.reduce((total, current) => total / current);
 }
 
+//round
+function roundNumber(num, decimals) {
+    return Number(num.toFixed(decimals));
+}
 
 //backspace button
-
-//round result to one decimal
 
 //add keyboard functionality
