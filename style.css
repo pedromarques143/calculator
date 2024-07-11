@@ -1,18 +1,21 @@
 body {
     display: flex;
+    flex-direction: column;
     align-content: center;
-    justify-content: center;
     background-color:burlywood;
+    align-items: center;
 }
 
 .page-title {
     text-align: center;
     font-family: monospace;
     font-size: 50px;
+    margin-top: 40px;
 }
 
 .calculator-container {
-    margin-top: 100px;
+    width: 290px;
+    margin-top: 50px;
     border-style: solid;
     padding: 20px;
     border-radius: 15px;
@@ -24,6 +27,7 @@ body {
 .calculator-screen {
     border-style: solid;
     height: 80px;
+    width: 274px;
     margin-bottom: 10px;
     border-radius: 10px;
     border-width: 2px;
