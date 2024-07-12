@@ -88,6 +88,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
     box-shadow: 1px 1px 0px 1px rgba(130,125,60,0.75);
+    cursor: pointer;
 }
 
 #add {
