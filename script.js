@@ -32,6 +32,7 @@ acButton.addEventListener("click", () => {
         }
         isOperatorSelected = false;
     }
+    backspaceButton.style.visibility = "hidden";
 });
 
 //backspace button
