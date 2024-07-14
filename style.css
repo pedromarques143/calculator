@@ -33,11 +33,20 @@ body {
     border-width: 2px;
     background-color:blanchedalmond;
     display: flex;
-    justify-content: flex-end;
     align-items: flex-end;
-    font-size: 47px;
+    font-size: 45px;
     padding-right: 10px;
     font-family: Courier, monospace, 'Andake Mono', 'Courier New';
+    justify-content: space-between;
+}
+
+#backspace-button {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    margin-bottom: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    visibility: hidden;
 }
 
 .first-line {

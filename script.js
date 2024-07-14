@@ -3,6 +3,7 @@ let selectedOperator;
 let secondNumber = "";
 
 let calculatorScreen = document.querySelector(".calculator-screen");
+let displayedNumber = document.querySelector(".displayed-number");
 
 let firstNumberExists = false;
 let secondNumberExists = false;
@@ -12,6 +13,7 @@ let isOperatorSelected = false;
 
 const calculatorNumbers = document.querySelectorAll(".calculator-button-number");
 const calculatorOperators = document.querySelectorAll(".calculator-button-operator");
+const backspaceButton = document.getElementById("backspace-button");
 
 //AC button
 const acButton = document.querySelector(".calculator-button-reset");
@@ -22,7 +24,8 @@ acButton.addEventListener("click", () => {
     secondNumberExists = false;
     dotExists = false;
     resultExists = false;
-    calculatorScreen.textContent = "0";
+    displayedNumber.textContent = "0";
+    calculatorScreen.style.justifyContent = "flex-end";
     if (isOperatorSelected) {
         for (let button of calculatorOperators) {
             button.style.backgroundColor = "darkkhaki";
@@ -31,12 +34,42 @@ acButton.addEventListener("click", () => {
     }
 });
 
+//backspace button
+let defaultBackspaceStyle;
+
+if (!firstNumberExists || !secondNumberExists) {
+    calculatorScreen.style.justifyContent = "flex-end";
+    backspaceButton.style.visibility = "hidden";
+}
+
+
+backspaceButton.addEventListener("click", () => {
+    if (!secondNumberExists) {
+        firstNumber = firstNumber.slice(0, -1);
+        if (firstNumber == "") {
+            firstNumber = "0";
+        }
+        displayedNumber.textContent = `${firstNumber}`;
+    } else {
+        secondNumber = secondNumber.slice(0, -1);
+        if (secondNumber == "") {
+            secondNumber = "0";
+        }
+        displayedNumber.textContent = `${secondNumber}`;
+    }
+});
+
 //get first number
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         if (resultExists && !isOperatorSelected) {
             firstNumber.toString();
-            firstNumber = "";  
+            if (button.textContent == ".") {
+                firstNumber = "0";
+                calculatorScreen.style.justifyContent = "space-between";
+            } else {
+                firstNumber = ""; 
+            }
             resultExists = false;
         }
         
@@ -45,16 +78,21 @@ for (let button of calculatorNumbers) {
                 firstNumber = "0.";
                 dotExists = true;
                 firstNumberExists = true;
-                calculatorScreen.textContent = firstNumber;
+                displayedNumber.textContent = `${firstNumber}`;
+                backspaceButton.style.visibility = "visible";
+                calculatorScreen.style.justifyContent = "space-between";
             } else if (button.textContent == "." && !dotExists) {
                 firstNumber += button.textContent;
                 dotExists = true;
-                calculatorScreen.textContent = firstNumber;
+                backspaceButton.style.visibility = "visible";
+                displayedNumber.textContent = `${firstNumber}`;
             } else if (button.textContent == "." || firstNumber.length == 9) {
                 firstNumber.slice(0, -1);
             } else {
                 firstNumber += button.textContent;
-                calculatorScreen.textContent = firstNumber;
+                backspaceButton.style.visibility = "visible";
+                displayedNumber.textContent = `${firstNumber}`;
+                calculatorScreen.style.justifyContent = "space-between";
                 firstNumberExists = true;
             }
         }
@@ -69,6 +107,7 @@ for (let button of calculatorOperators) {
             isOperatorSelected = true;
             dotExists = false;
             button.style.backgroundColor = "darkolivegreen";
+            backspaceButton.style.visibility = "hidden";
         }
 
         if (firstNumberExists && secondNumberExists) {
@@ -77,6 +116,7 @@ for (let button of calculatorOperators) {
             button.style.backgroundColor = "darkolivegreen";
             selectedOperator = button.textContent;
             dotExists = false;
+            backspaceButton.style.visibility = "hidden";
         }
     });
 }
@@ -89,17 +129,23 @@ for (let button of calculatorNumbers) {
                 if (button.textContent == "." && !dotExists && !secondNumberExists) {
                     secondNumber = "0.";
                     dotExists = true;
-                    calculatorScreen.textContent = secondNumber;
+                    displayedNumber.textContent = `${secondNumber}`;
+                    backspaceButton.style.visibility = "visible";
+                    calculatorScreen.style.justifyContent = "space-between";
                     secondNumberExists = true;
                 } else if (button.textContent == "." && !dotExists) {
                     secondNumber += button.textContent;
                     dotExists = true;
-                    calculatorScreen.textContent = secondNumber;
+                    displayedNumber.textContent = `${secondNumber}`;
+                    backspaceButton.style.visibility = "visible";
+                    calculatorScreen.style.justifyContent = "space-between";
                 } else if (button.textContent == "." || secondNumber.length == 9) {
                     secondNumber.slice(0, -1);
                 } else {
                     secondNumber += button.textContent;
-                    calculatorScreen.textContent = secondNumber;
+                    displayedNumber.textContent = `${secondNumber}`;
+                    backspaceButton.style.visibility = "visible";
+                    calculatorScreen.style.justifyContent = "space-between";
                     secondNumberExists = true;
                 }
 
@@ -117,6 +163,8 @@ const equalsButton = document.querySelector(".calculator-button-equals");
 
 equalsButton.addEventListener("click", () => {
     operate(firstNumber, secondNumber, selectedOperator);
+    calculatorScreen.style.justifyContent = "flex-end";
+    backspaceButton.style.visibility = "hidden";
 });
 
 
@@ -141,7 +189,7 @@ function operate(first, second, operator) {
     let resultLength = result.toString().length;
 
     if (result > 999999999) {
-        calculatorScreen.textContent = "TOOBIG4ME";
+        displayedNumber.textContent = "TOOBIG4ME";
         result = 0;
     } else if (resultLength > 9) {
         let integerNumber = Math.round(result);
@@ -150,9 +198,9 @@ function operate(first, second, operator) {
         console.log(decimalPlaces);
         result = roundNumber(result, decimalPlaces);
         console.log(result);
-        calculatorScreen.textContent = result;
+        displayedNumber.textContent = result;
     } else {
-        calculatorScreen.textContent = result;
+        displayedNumber.textContent = result;
     }
 
     secondNumber.toString();
@@ -164,6 +212,7 @@ function operate(first, second, operator) {
     isOperatorSelected = false;
     resultExists = true;
     dotExists = false;
+    calculatorScreen.style.justifyContent = "flex-end";
 
     return result;
 }
