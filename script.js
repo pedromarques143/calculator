@@ -89,7 +89,12 @@ for (let button of calculatorNumbers) {
             } else if (button.textContent == "." || firstNumber.length == 9) {
                 firstNumber.slice(0, -1);
             } else {
-                firstNumber += button.textContent;
+                if (firstNumber == "0") {
+                    firstNumber = button.textContent;
+                }  else {
+                    firstNumber += button.textContent;
+                }
+                
                 backspaceButton.style.visibility = "visible";
                 displayedNumber.textContent = `${firstNumber}`;
                 calculatorScreen.style.justifyContent = "space-between";
@@ -142,7 +147,12 @@ for (let button of calculatorNumbers) {
                 } else if (button.textContent == "." || secondNumber.length == 9) {
                     secondNumber.slice(0, -1);
                 } else {
-                    secondNumber += button.textContent;
+                    if (secondNumber == "0") {
+                        secondNumber = button.textContent;
+                    }  else {
+                        secondNumber += button.textContent;
+                    }
+
                     displayedNumber.textContent = `${secondNumber}`;
                     backspaceButton.style.visibility = "visible";
                     calculatorScreen.style.justifyContent = "space-between";
@@ -230,7 +240,5 @@ function divide(array) {
 function roundNumber(num, decimals) {
     return Number(num.toFixed(decimals));
 }
-
-//backspace button
 
 //add keyboard functionality
