@@ -199,6 +199,8 @@ function operate(first, second, operator) {
     if (result > 999999999 || result < -999999999) {
         displayedNumber.textContent = "TOOBIG4ME";
         result = 0;
+    } else if (resultLength == 10 && result[0] != "-") {
+        displayedNumber.textContent = result;
     } else if (resultLength > 9) {
         let integerNumber = Math.round(result);
         let integerLength = integerNumber.toString().length;
