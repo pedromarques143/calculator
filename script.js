@@ -196,7 +196,7 @@ function operate(first, second, operator) {
 
     let resultLength = result.toString().length;
 
-    if (result > 999999999) {
+    if (result > 999999999 || result < -999999999) {
         displayedNumber.textContent = "TOOBIG4ME";
         result = 0;
     } else if (resultLength > 9) {
