@@ -15,6 +15,7 @@ const calculatorNumbers = document.querySelectorAll(".calculator-button-number")
 const calculatorOperators = document.querySelectorAll(".calculator-button-operator");
 const backspaceButton = document.getElementById("backspace-button");
 
+
 //AC button
 const acButton = document.querySelector(".calculator-button-reset");
 acButton.addEventListener("click", () => {
@@ -36,28 +37,13 @@ acButton.addEventListener("click", () => {
 });
 
 //backspace button
-let defaultBackspaceStyle;
-
-if (!firstNumberExists || !secondNumberExists) {
+if (firstNumber == "0" || secondNumber == "0") {
     calculatorScreen.style.justifyContent = "flex-end";
     backspaceButton.style.visibility = "hidden";
 }
 
-
 backspaceButton.addEventListener("click", () => {
-    if (!secondNumberExists) {
-        firstNumber = firstNumber.slice(0, -1);
-        if (firstNumber == "") {
-            firstNumber = "0";
-        }
-        displayedNumber.textContent = `${firstNumber}`;
-    } else {
-        secondNumber = secondNumber.slice(0, -1);
-        if (secondNumber == "") {
-            secondNumber = "0";
-        }
-        displayedNumber.textContent = `${secondNumber}`;
-    }
+    backspaceNumber();
 });
 
 //get first number
@@ -242,4 +228,31 @@ function roundNumber(num, decimals) {
     return Number(num.toFixed(decimals));
 }
 
-//add keyboard functionality
+//backspace function
+function backspaceNumber(){
+    if (!secondNumberExists) {
+        firstNumber = firstNumber.slice(0, -1);
+        if (firstNumber == "") {
+            firstNumber = "0";
+            calculatorScreen.style.justifyContent = "flex-end";
+            backspaceButton.style.visibility = "hidden";
+        }
+        displayedNumber.textContent = `${firstNumber}`;
+    } else {
+        secondNumber = secondNumber.slice(0, -1);
+        if (secondNumber == "") {
+            secondNumber = "0";
+            calculatorScreen.style.justifyContent = "flex-end";
+            backspaceButton.style.visibility = "hidden";
+        }
+        displayedNumber.textContent = `${secondNumber}`;
+    }
+}
+
+//keyboard
+window.addEventListener("keydown", function (event) {
+    const key = event.key;
+    if (key === "Backspace") {
+        backspaceNumber();
+    }
+})
