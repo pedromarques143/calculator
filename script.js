@@ -49,45 +49,8 @@ backspaceButton.addEventListener("click", () => {
 //get first number
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
-        if (resultExists && !isOperatorSelected) {
-            firstNumber.toString();
-            if (button.textContent == ".") {
-                firstNumber = "0";
-                calculatorScreen.style.justifyContent = "space-between";
-            } else {
-                firstNumber = ""; 
-            }
-            resultExists = false;
-        }
-        
-        if (firstNumber.length < 9 && !isOperatorSelected) {
-            if (button.textContent == "." && !dotExists && !firstNumberExists) {
-                firstNumber = "0.";
-                dotExists = true;
-                firstNumberExists = true;
-                displayedNumber.textContent = `${firstNumber}`;
-                backspaceButton.style.visibility = "visible";
-                calculatorScreen.style.justifyContent = "space-between";
-            } else if (button.textContent == "." && !dotExists) {
-                firstNumber += button.textContent;
-                dotExists = true;
-                backspaceButton.style.visibility = "visible";
-                displayedNumber.textContent = `${firstNumber}`;
-            } else if (button.textContent == "." || firstNumber.length == 9) {
-                firstNumber.slice(0, -1);
-            } else {
-                if (firstNumber == "0") {
-                    firstNumber = button.textContent;
-                }  else {
-                    firstNumber += button.textContent;
-                }
-                
-                backspaceButton.style.visibility = "visible";
-                displayedNumber.textContent = `${firstNumber}`;
-                calculatorScreen.style.justifyContent = "space-between";
-                firstNumberExists = true;
-            }
-        }
+        let buttonValue = button.textContent;
+        getFirstNumber(buttonValue);
     });
 }
 
@@ -116,42 +79,8 @@ for (let button of calculatorOperators) {
 //get second number
 for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
-        if (isOperatorSelected == true) {
-            if (secondNumber.length < 9 && isOperatorSelected) {
-                if (button.textContent == "." && !dotExists && !secondNumberExists) {
-                    secondNumber = "0.";
-                    dotExists = true;
-                    displayedNumber.textContent = `${secondNumber}`;
-                    backspaceButton.style.visibility = "visible";
-                    calculatorScreen.style.justifyContent = "space-between";
-                    secondNumberExists = true;
-                } else if (button.textContent == "." && !dotExists) {
-                    secondNumber += button.textContent;
-                    dotExists = true;
-                    displayedNumber.textContent = `${secondNumber}`;
-                    backspaceButton.style.visibility = "visible";
-                    calculatorScreen.style.justifyContent = "space-between";
-                } else if (button.textContent == "." || secondNumber.length == 9) {
-                    secondNumber.slice(0, -1);
-                } else {
-                    if (secondNumber == "0") {
-                        secondNumber = button.textContent;
-                    }  else {
-                        secondNumber += button.textContent;
-                    }
-
-                    displayedNumber.textContent = `${secondNumber}`;
-                    backspaceButton.style.visibility = "visible";
-                    calculatorScreen.style.justifyContent = "space-between";
-                    secondNumberExists = true;
-                }
-
-                for (let buttonTwo of calculatorOperators) {
-                    buttonTwo.style.backgroundColor = "darkseagreen";
-                }
-            }
-        }
-
+        let buttonValue = button.textContent;
+        getSecondNumber(buttonValue);
     });
 }
 
@@ -165,6 +94,87 @@ equalsButton.addEventListener("click", () => {
 });
 
 
+//get first number function
+function getFirstNumber(value) {
+    if (resultExists && !isOperatorSelected) {
+        firstNumber.toString();
+        if (value == ".") {
+            firstNumber = "0";
+            calculatorScreen.style.justifyContent = "space-between";
+        } else {
+            firstNumber = ""; 
+        }firstNumber += value;
+        resultExists = false;
+    }
+    
+    if (firstNumber.length < 9 && !isOperatorSelected) {
+        if (value == "." && !dotExists && !firstNumberExists) {
+            firstNumber = "0.";
+            dotExists = true;
+            firstNumberExists = true;
+            displayedNumber.textContent = `${firstNumber}`;
+            backspaceButton.style.visibility = "visible";
+            calculatorScreen.style.justifyContent = "space-between";
+        } else if (value == "." && !dotExists) {
+            firstNumber += value;
+            dotExists = true;
+            backspaceButton.style.visibility = "visible";
+            displayedNumber.textContent = `${firstNumber}`;
+        } else if (value == "." || firstNumber.length == 9) {
+            firstNumber.slice(0, -1);
+        } else {
+            if (firstNumber == "0") {
+                firstNumber = value;
+            }  else {
+                firstNumber += value;
+            }
+            
+            backspaceButton.style.visibility = "visible";
+            displayedNumber.textContent = `${firstNumber}`;
+            calculatorScreen.style.justifyContent = "space-between";
+            firstNumberExists = true;
+        }
+    }
+}
+
+//get second number function
+function getSecondNumber(value) {
+    if (isOperatorSelected == true) {
+        if (secondNumber.length < 9 && isOperatorSelected) {
+            if (value == "." && !dotExists && !secondNumberExists) {
+                secondNumber = "0.";
+                dotExists = true;
+                displayedNumber.textContent = `${secondNumber}`;
+                backspaceButton.style.visibility = "visible";
+                calculatorScreen.style.justifyContent = "space-between";
+                secondNumberExists = true;
+            } else if (value == "." && !dotExists) {
+                secondNumber += value;
+                dotExists = true;
+                displayedNumber.textContent = `${secondNumber}`;
+                backspaceButton.style.visibility = "visible";
+                calculatorScreen.style.justifyContent = "space-between";
+            } else if (value == "." || secondNumber.length == 9) {
+                secondNumber.slice(0, -1);
+            } else {
+                if (secondNumber == "0") {
+                    secondNumber = value;
+                }  else {
+                    secondNumber += value;
+                }
+
+                displayedNumber.textContent = `${secondNumber}`;
+                backspaceButton.style.visibility = "visible";
+                calculatorScreen.style.justifyContent = "space-between";
+                secondNumberExists = true;
+            }
+
+            for (let buttonTwo of calculatorOperators) {
+                buttonTwo.style.backgroundColor = "darkseagreen";
+            }
+        }
+    }
+}
 //get result function
 function operate(first, second, operator) {
     let numberOne = Number(first);
@@ -249,10 +259,14 @@ function backspaceNumber(){
     }
 }
 
-//keyboard
+
+//keyboard functionality
 window.addEventListener("keydown", function (event) {
     const key = event.key;
-    if (key === "Backspace") {
+    if (!isNaN(key)) {
+        getFirstNumber(key);
+        getSecondNumber(key);
+    } else if (key === "Backspace") {
         backspaceNumber();
     }
 })
