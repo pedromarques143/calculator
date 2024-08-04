@@ -235,7 +235,7 @@ function resetCalculator() {
     calculatorScreen.style.justifyContent = "flex-end";
     if (isOperatorSelected) {
         for (let button of calculatorOperators) {
-            button.style.backgroundColor = "darkkhaki";
+            button.style.backgroundColor = "darkseagreen";
         }
         isOperatorSelected = false;
     }
@@ -297,3 +297,5 @@ window.addEventListener("keydown", function (event) {
         resetCalculator();
     }
 })
+
+//add functionlity to use negative numbers on operations
