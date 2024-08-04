@@ -19,21 +19,7 @@ const backspaceButton = document.getElementById("backspace-button");
 //AC button
 const acButton = document.querySelector(".calculator-button-reset");
 acButton.addEventListener("click", () => {
-    firstNumber = "";
-    firstNumberExists = false;
-    secondNumber = "";
-    secondNumberExists = false;
-    dotExists = false;
-    resultExists = false;
-    displayedNumber.textContent = "0";
-    calculatorScreen.style.justifyContent = "flex-end";
-    if (isOperatorSelected) {
-        for (let button of calculatorOperators) {
-            button.style.backgroundColor = "darkkhaki";
-        }
-        isOperatorSelected = false;
-    }
-    backspaceButton.style.visibility = "hidden";
+    resetCalculator();
 });
 
 //backspace button
@@ -169,6 +155,11 @@ function getOperator(value) {
         isOperatorSelected = true;
         dotExists = false;
         backspaceButton.style.visibility = "hidden";
+        for (let button of calculatorOperators) {
+            if (button.textContent == value) {
+                button.style.backgroundColor = "darkolivegreen";
+            }
+        }
     }
 
     if (firstNumberExists && secondNumberExists) {
@@ -177,11 +168,10 @@ function getOperator(value) {
         selectedOperator = value;
         dotExists = false;
         backspaceButton.style.visibility = "hidden";
-    }
-
-    for (let button of calculatorOperators) {
-        if (button.textContent == value) {
-            button.style.backgroundColor = "darkolivegreen";
+        for (let button of calculatorOperators) {
+            if (button.textContent == value) {
+                button.style.backgroundColor = "darkolivegreen";
+            }
         }
     }
 }
@@ -231,6 +221,25 @@ function operate(first, second, operator) {
     calculatorScreen.style.justifyContent = "flex-end";
 
     return result;
+}
+
+//reset function
+function resetCalculator() {
+    firstNumber = "";
+    firstNumberExists = false;
+    secondNumber = "";
+    secondNumberExists = false;
+    dotExists = false;
+    resultExists = false;
+    displayedNumber.textContent = "0";
+    calculatorScreen.style.justifyContent = "flex-end";
+    if (isOperatorSelected) {
+        for (let button of calculatorOperators) {
+            button.style.backgroundColor = "darkkhaki";
+        }
+        isOperatorSelected = false;
+    }
+    backspaceButton.style.visibility = "hidden";
 }
 
 //muiltiply
@@ -284,5 +293,7 @@ window.addEventListener("keydown", function (event) {
         operate(firstNumber, secondNumber, selectedOperator);
         calculatorScreen.style.justifyContent = "flex-end";
         backspaceButton.style.visibility = "hidden";
+    } else if (key === "Delete") {
+        resetCalculator();
     }
 })
