@@ -57,23 +57,9 @@ for (let button of calculatorNumbers) {
 //get operator
 for (let button of calculatorOperators) {
     button.addEventListener("click", () => {
-        if (firstNumberExists && !isOperatorSelected) {
-            selectedOperator = button.textContent;
-            isOperatorSelected = true;
-            dotExists = false;
-            button.style.backgroundColor = "darkolivegreen";
-            backspaceButton.style.visibility = "hidden";
-        }
-
-        if (firstNumberExists && secondNumberExists) {
-            operate (firstNumber, secondNumber, selectedOperator);
-            isOperatorSelected = true;
-            button.style.backgroundColor = "darkolivegreen";
-            selectedOperator = button.textContent;
-            dotExists = false;
-            backspaceButton.style.visibility = "hidden";
-        }
-    });
+        let buttonValue = button.textContent;
+        getOperator(buttonValue);
+    });    
 }
 
 //get second number
@@ -175,6 +161,31 @@ function getSecondNumber(value) {
         }
     }
 }
+
+//get operator function
+function getOperator(value) {
+    if (firstNumberExists && !isOperatorSelected) {
+        selectedOperator = value;
+        isOperatorSelected = true;
+        dotExists = false;
+        backspaceButton.style.visibility = "hidden";
+    }
+
+    if (firstNumberExists && secondNumberExists) {
+        operate (firstNumber, secondNumber, selectedOperator);
+        isOperatorSelected = true;
+        selectedOperator = value;
+        dotExists = false;
+        backspaceButton.style.visibility = "hidden";
+    }
+
+    for (let button of calculatorOperators) {
+        if (button.textContent == value) {
+            button.style.backgroundColor = "darkolivegreen";
+        }
+    }
+}
+
 //get result function
 function operate(first, second, operator) {
     let numberOne = Number(first);
@@ -202,9 +213,7 @@ function operate(first, second, operator) {
         let integerNumber = Math.round(result);
         let integerLength = integerNumber.toString().length;
         let decimalPlaces = 9 - integerLength - 1;
-        console.log(decimalPlaces);
         result = roundNumber(result, decimalPlaces);
-        console.log(result);
         displayedNumber.textContent = result;
     } else {
         displayedNumber.textContent = result;
@@ -263,10 +272,17 @@ function backspaceNumber(){
 //keyboard functionality
 window.addEventListener("keydown", function (event) {
     const key = event.key;
-    if (!isNaN(key)) {
+    if (!isNaN(key) || key == ".") {
         getFirstNumber(key);
         getSecondNumber(key);
     } else if (key === "Backspace") {
         backspaceNumber();
+    } else if (key === "/" || key === "*" || key === "-" || key === "+") {
+        getOperator(key);
+    }
+    else if (key === "Enter") {
+        operate(firstNumber, secondNumber, selectedOperator);
+        calculatorScreen.style.justifyContent = "flex-end";
+        backspaceButton.style.visibility = "hidden";
     }
 })
