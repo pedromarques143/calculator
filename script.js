@@ -75,7 +75,8 @@ function getFirstNumber(value) {
             calculatorScreen.style.justifyContent = "space-between";
         } else {
             firstNumber = ""; 
-        }firstNumber += value;
+        }
+        firstNumber += value;
         resultExists = false;
     }
     
@@ -100,7 +101,6 @@ function getFirstNumber(value) {
             }  else {
                 firstNumber += value;
             }
-            
             backspaceButton.style.visibility = "visible";
             displayedNumber.textContent = `${firstNumber}`;
             calculatorScreen.style.justifyContent = "space-between";
@@ -134,7 +134,6 @@ function getSecondNumber(value) {
                 }  else {
                     secondNumber += value;
                 }
-
                 displayedNumber.textContent = `${secondNumber}`;
                 backspaceButton.style.visibility = "visible";
                 calculatorScreen.style.justifyContent = "space-between";
@@ -173,6 +172,23 @@ function getOperator(value) {
                 button.style.backgroundColor = "darkolivegreen";
             }
         }
+    }
+
+    //use minus operator to create negative numbers
+    if (value == "-" && !firstNumberExists) {
+        firstNumber = "-";
+        firstNumberExists = true;
+        displayedNumber.textContent = `${firstNumber}`;
+        backspaceButton.style.visibility = "visible";
+        calculatorScreen.style.justifyContent = "space-between";
+    }
+
+    if (value == "-" && !secondNumberExists) {
+        secondNumber = "-";
+        secondNumberExists = true;
+        displayedNumber.textContent = `${secondNumber}`;
+        backspaceButton.style.visibility = "visible";
+        calculatorScreen.style.justifyContent = "space-between";
     }
 }
 
