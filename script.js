@@ -60,9 +60,11 @@ for (let button of calculatorNumbers) {
 const equalsButton = document.querySelector(".calculator-button-equals");
 
 equalsButton.addEventListener("click", () => {
-    operate(firstNumber, secondNumber, selectedOperator);
-    calculatorScreen.style.justifyContent = "flex-end";
-    backspaceButton.style.visibility = "hidden";
+    if (secondNumber != "-") {
+        operate(firstNumber, secondNumber, selectedOperator);
+        calculatorScreen.style.justifyContent = "flex-end";
+        backspaceButton.style.visibility = "hidden";
+    }
 });
 
 
@@ -149,7 +151,7 @@ function getSecondNumber(value) {
 
 //get operator function
 function getOperator(value) {
-    if (firstNumberExists && !isOperatorSelected) {
+    if (firstNumberExists && !isOperatorSelected && firstNumber != "-") {
         selectedOperator = value;
         isOperatorSelected = true;
         dotExists = false;
@@ -161,7 +163,7 @@ function getOperator(value) {
         }
     }
 
-    if (firstNumberExists && secondNumberExists) {
+    if (firstNumberExists && secondNumberExists && secondNumber != "-") {
         operate (firstNumber, secondNumber, selectedOperator);
         isOperatorSelected = true;
         selectedOperator = value;
@@ -183,7 +185,7 @@ function getOperator(value) {
         calculatorScreen.style.justifyContent = "space-between";
     }
 
-    if (value == "-" && !secondNumberExists) {
+    if (value == "-" && isOperatorSelected && !secondNumberExists) {
         secondNumber = "-";
         secondNumberExists = true;
         displayedNumber.textContent = `${secondNumber}`;
@@ -315,5 +317,3 @@ window.addEventListener("keydown", function (event) {
         resetCalculator();
     }
 })
-
-//add functionlity to use negative numbers on operations
