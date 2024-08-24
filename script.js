@@ -151,6 +151,7 @@ function getSecondNumber(value) {
 
 //get operator function
 function getOperator(value) {
+    let isMinus = false;
     if (firstNumberExists && !isOperatorSelected && firstNumber != "-") {
         selectedOperator = value;
         isOperatorSelected = true;
@@ -160,6 +161,9 @@ function getOperator(value) {
             if (button.textContent == value) {
                 button.style.backgroundColor = "darkolivegreen";
             }
+        }
+        if (value == "-") {
+            isMinus = true;
         }
     }
 
@@ -185,7 +189,7 @@ function getOperator(value) {
         calculatorScreen.style.justifyContent = "space-between";
     }
 
-    if (value == "-" && isOperatorSelected && !secondNumberExists) {
+    if (value == "-" && firstNumberExists && !isMinus && !secondNumberExists) {
         secondNumber = "-";
         secondNumberExists = true;
         displayedNumber.textContent = `${secondNumber}`;
