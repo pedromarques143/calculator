@@ -189,7 +189,7 @@ function getOperator(value) {
         calculatorScreen.style.justifyContent = "space-between";
     }
 
-    if (value == "-" && firstNumberExists && !isMinus && !secondNumberExists) {
+    if (value == "-" && firstNumberExists && !isMinus && !secondNumberExists && isOperatorSelected) {
         secondNumber = "-";
         secondNumberExists = true;
         displayedNumber.textContent = `${secondNumber}`;
