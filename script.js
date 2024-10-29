@@ -324,7 +324,7 @@ window.addEventListener("keydown", function (event) {
         getSecondNumber(key);
         for (let button of calculatorNumbers) {
             if (key == ".") {
-                colorKey(dotButton)
+                colorKey(dotButton);
             } else if (button.id == key) {
                 colorKey(button);
             }
