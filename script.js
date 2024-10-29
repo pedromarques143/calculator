@@ -20,7 +20,7 @@ let pressedNumberColor = "#ab860e";
 let operatorColor = "darkseagreen";
 let pressedOperatorColor = "darkolivegreen";
 let equalsColor = "darksalmon";
-let pressedEqualsColor = "brown";
+let pressedEqualsColor = "sienna";
 
 
 //AC button
@@ -154,6 +154,7 @@ function getSecondNumber(value) {
 
             for (let buttonTwo of calculatorOperators) {
                 buttonTwo.style.backgroundColor = "darkseagreen";
+                buttonTwo.style.boxShadow = "1px 1px 0px 1px rgba(61,89,61,0.75)";
             }
         }
     }
