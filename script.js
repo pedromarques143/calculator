@@ -15,6 +15,13 @@ const calculatorNumbers = document.querySelectorAll(".calculator-button-number")
 const calculatorOperators = document.querySelectorAll(".calculator-button-operator");
 const backspaceButton = document.getElementById("backspace-button");
 
+let numberColor = "darkkhaki";
+let pressedNumberColor = "#ab860e";
+let operatorColor = "darkseagreen";
+let pressedOperatorColor = "darkolivegreen";
+let equalsColor = "darksalmon";
+let pressedEqualsColor = "brown";
+
 
 //AC button
 const acButton = document.querySelector(".calculator-button-reset");
@@ -37,7 +44,7 @@ for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         let buttonValue = button.textContent;
         getFirstNumber(buttonValue);
-        colorKey(button);
+        colorKey(button, pressedNumberColor, numberColor);
     });
 }
 
@@ -54,7 +61,7 @@ for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         let buttonValue = button.textContent;
         getSecondNumber(buttonValue);
-        colorKey(button);
+        colorKey(button, pressedNumberColor, numberColor);
     });
 }
 
@@ -66,6 +73,7 @@ equalsButton.addEventListener("click", () => {
         operate(firstNumber, secondNumber, selectedOperator);
         calculatorScreen.style.justifyContent = "flex-end";
         backspaceButton.style.visibility = "hidden";
+        colorKey(equalsButton, pressedEqualsColor, equalsColor);
     }
 });
 
@@ -162,6 +170,7 @@ function getOperator(value) {
         for (let button of calculatorOperators) {
             if (button.textContent == value) {
                 button.style.backgroundColor = "darkolivegreen";
+                button.style.boxShadow = "0px 0px 0px 0px";
             }
         }
         if (value == "-") {
@@ -178,11 +187,12 @@ function getOperator(value) {
         for (let button of calculatorOperators) {
             if (button.textContent == value) {
                 button.style.backgroundColor = "darkolivegreen";
+                button.style.boxShadow = "0px 0px 0px 0px";
             }
         }
     }
 
-    //use minus operator to create negative numbers
+//use minus operator to create negative numbers
     if (value == "-" && !firstNumberExists) {
         firstNumber = "-";
         firstNumberExists = true;
@@ -268,6 +278,7 @@ function resetCalculator() {
         isOperatorSelected = false;
     }
     backspaceButton.style.visibility = "hidden";
+    colorKey(acButton, pressedOperatorColor, operatorColor);
 }
 
 //muiltiply
@@ -306,11 +317,11 @@ function backspaceNumber(){
 }
 
 //color pressed key
-function colorKey(key) {
-    key.style.backgroundColor = "#ab860e";
+function colorKey(key, color, originalColor) {
+    key.style.backgroundColor = color;
     key.style.boxShadow = "0px 0px 0px 0px";          
     setTimeout(() => {
-        key.style.backgroundColor = "darkkhaki";
+        key.style.backgroundColor = originalColor;
         key.style.boxShadow = "1px 1px 0px 1px #827d3cbf";
     }, 100);
 }
@@ -324,9 +335,9 @@ window.addEventListener("keydown", function (event) {
         getSecondNumber(key);
         for (let button of calculatorNumbers) {
             if (key == ".") {
-                colorKey(dotButton);
+                colorKey(dotButton, pressedNumberColor, numberColor);
             } else if (button.id == key) {
-                colorKey(button);
+                colorKey(button, pressedNumberColor, numberColor);
             }
         }
     } else if (key === "Backspace") {
@@ -339,6 +350,7 @@ window.addEventListener("keydown", function (event) {
         operate(firstNumber, secondNumber, selectedOperator);
         calculatorScreen.style.justifyContent = "flex-end";
         backspaceButton.style.visibility = "hidden";
+        colorKey(equalsButton, pressedEqualsColor, equalsColor);
     } else if (key === "Delete") {
         resetCalculator();
     }
