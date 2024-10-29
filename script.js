@@ -37,6 +37,7 @@ for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         let buttonValue = button.textContent;
         getFirstNumber(buttonValue);
+        colorKey(button);
     });
 }
 
@@ -53,6 +54,7 @@ for (let button of calculatorNumbers) {
     button.addEventListener("click", () => {
         let buttonValue = button.textContent;
         getSecondNumber(buttonValue);
+        colorKey(button);
     });
 }
 
@@ -303,13 +305,30 @@ function backspaceNumber(){
     }
 }
 
+//color pressed key
+function colorKey(key) {
+    key.style.backgroundColor = "#ab860e";
+    key.style.boxShadow = "0px 0px 0px 0px";          
+    setTimeout(() => {
+        key.style.backgroundColor = "darkkhaki";
+        key.style.boxShadow = "1px 1px 0px 1px #827d3cbf";
+    }, 100);
+}
 
 //keyboard functionality
 window.addEventListener("keydown", function (event) {
     const key = event.key;
+    const dotButton = document.getElementById("dot");
     if (!isNaN(key) || key == ".") {
         getFirstNumber(key);
         getSecondNumber(key);
+        for (let button of calculatorNumbers) {
+            if (key == ".") {
+                colorKey(dotButton)
+            } else if (button.id == key) {
+                colorKey(button);
+            }
+        }
     } else if (key === "Backspace") {
         backspaceNumber();
         event.preventDefault();
