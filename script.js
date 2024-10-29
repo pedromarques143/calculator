@@ -345,8 +345,8 @@ window.addEventListener("keydown", function (event) {
         event.preventDefault();
     } else if (key === "/" || key === "*" || key === "-" || key === "+") {
         getOperator(key);
-    }
-    else if (key === "Enter") {
+        event.preventDefault();
+    } else if (key === "Enter") {
         operate(firstNumber, secondNumber, selectedOperator);
         calculatorScreen.style.justifyContent = "flex-end";
         backspaceButton.style.visibility = "hidden";
