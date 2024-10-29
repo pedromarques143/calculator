@@ -310,6 +310,7 @@ window.addEventListener("keydown", function (event) {
         getSecondNumber(key);
     } else if (key === "Backspace") {
         backspaceNumber();
+        event.preventDefault();
     } else if (key === "/" || key === "*" || key === "-" || key === "+") {
         getOperator(key);
     }
