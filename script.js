@@ -81,6 +81,7 @@ equalsButton.addEventListener("click", () => {
 //get first number function
 function getFirstNumber(value) {
     if (resultExists && !isOperatorSelected) {
+        firstNumber += value;
         firstNumber.toString();
         if (value == ".") {
             firstNumber = "0";
@@ -88,7 +89,6 @@ function getFirstNumber(value) {
         } else {
             firstNumber = ""; 
         }
-        firstNumber += value;
         resultExists = false;
     }
     
