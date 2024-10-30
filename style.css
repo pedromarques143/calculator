@@ -4,6 +4,7 @@ body {
     align-content: center;
     background-color:burlywood;
     align-items: center;
+    min-height: 98vh;
 }
 
 .page-title {
@@ -134,4 +135,8 @@ body {
 #subtract {
     background-color:darkseagreen;
     box-shadow: 1px 1px 0px 1px rgba(61,89,61,0.75);    
+}
+
+footer {
+    margin-top: auto;
 }
